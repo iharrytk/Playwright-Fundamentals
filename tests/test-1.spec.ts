@@ -37,3 +37,63 @@ test('test locator get by placeholder', async ({ page }) => {
 });
 
 
+test('test locator get by text', async ({ page }) => {
+  await page.goto('http://127.0.0.1:5500/tests/locators.html');
+
+  //creating locator and expecting the locator to be visible action
+
+  await expect(page.getByText('Welcome, John')).toBeVisible();
+  await expect(page.getByText('Welcome, John',{exact:true})).toBeVisible();  
+ 
+  
+});
+
+test('test locator Regular Expressions', async ({ page }) => {
+  await page.goto('http://127.0.0.1:5500/tests/locators.html');
+
+  //creating locator and expecting the locator to be visible action
+  //Regular Expressions
+  
+  //await expect(page.getByText(/welcome,\sjohn/i)).toBeVisible();
+
+  //await expect(page.getByText(/welcome,\s[a-z]/i)).toBeVisible();
+
+  //await expect(page.getByText(/[a-z],\s[a-z]/i)).toBeVisible();
+
+  await expect(page.getByText(/[A-Za-z],\s[A-Za-z]/i)).toBeVisible();
+
+  //await expect(page.getByText(/[A-Za-z],\s[A-Za-z]{5,20}/i)).toBeVisible();
+});
+
+
+test('test locator alt text', async ({ page }) => {
+  await page.goto('http://127.0.0.1:5500/tests/locators.html');
+
+  //creating locator and action
+  await page.getByAltText('Playwright Logo').click();
+
+  
+});
+
+test('test locator get by title', async ({ page }) => {
+  await page.goto('http://127.0.0.1:5500/tests/locators.html');
+
+  //creating locator and action
+  await expect(page.getByTitle('More Info')).toHaveText('Hover over me');
+
+  
+});
+
+
+test('test locator get by testid', async ({ page }) => {
+  await page.goto('http://127.0.0.1:5500/tests/locators.html');
+
+  //creating locator and action
+  await expect(page.getByTestId('submit-btn')).toHaveText('Submit Form');
+
+  
+});
+
+
+
+
